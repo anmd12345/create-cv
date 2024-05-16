@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width">
+<meta charset="UTF-8">
+<title>Đăng ký tài khoản</title>
+<th:block th:include="user/fragments/head"></th:block>
+<link rel="stylesheet"
+	th:href="@{plugins/fontawesome-free/css/all.min.css}">
+<!-- Theme style -->
+<link rel="stylesheet" th:href="@{dist/css/adminlte.min.css}">
+</head>
+<body style="background: black">
+	<div id="loader-wrapper">
+		<div id="loader"></div>
+		<div class="loader-section section-left"></div>
+		<div class="loader-section section-right"></div>
+	</div>
+	<!-- Menu -->
+	<nav class="navbar navbar-expand-lg">
+		<div class="container-fluid">
+			<a class="navbar-brand" th:href="@{/index}"> CV <span
+				style="color: red"> TEAMPLATE </span><span class="heart">&#10084</span>
+			</a>
+			<div style="margin: 0 auto">
+				<nav>
+					<ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+						<li th:if="${session.currentUser != null}" class="nav-item"><a
+							class="nav-link" th:href="@{/protofile}">Xin chào <span
+								th:text="${session.currentUser.username}"></span></a></li>
+						<li class="nav-item"><a class="nav-link nav-link-1"
+							th:href="@{/index}">Trang chủ</a></li>
+						<li
+							th:if="${session.currentUser != null && session.currentUser.roles.id == 3}"
+							class="nav-item"><a class="nav-link nav-link-2"
+							th:href="@{/personal}">Tạo CV</span></a></li>
+						<li
+							th:if="${session.currentUser != null && session.currentUser.roles.id == 1}"
+							class="nav-item"><a class="nav-link nav-link-3"
+							th:href="@{/admin}">Quản trị trang</a></li>
+						<li th:if="${session.currentUser == null}" class="nav-item"><a
+							class="nav-link nav-link-2" th:href="@{/login}">Đăng Nhập</a></li>
+						<li th:if="${session.currentUser == null}" class="nav-item"><a
+							class="nav-link nav-link-2" th:href="@{/register}">Đăng Ký</a></li>
+						<li th:if="${session.currentUser != null}" class="nav-item"><a
+							class="nav-link nav-link-1" href="logout">Đăng Xuất</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</nav>
+	<div class="wrapper"
+		style="background-image: linear-gradient(black, #12c2e9, #fff)">
+		<div class="content-wrapper"
+			style="background-image: linear-gradient(black, #12c2e9, #fff)">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1>Đăng ký</h1>
+						</div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+								<li class="breadcrumb-item active">Đăng ký</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<!-- left column -->
+						<div class="col-md-12">
+							<!-- jquery validation -->
+							<div class="card card-primary">
+								<div class="card-header">
+									<h3 class="card-title">
+										Đăng ký <small>tài khoản mới</small>
+									</h3>
+								</div>
+								<!-- /.card-header -->
+								<!-- form start -->
+								<form id="quickForm" th:action="@{/register}"
+									th:object="${userRequest}" method="POST"
+									style="background-image: linear-gradient(white, #12c2e9, #fff)">
+									<div class="card-body">
+										<div class="form-group">
+											<label for="username">Username</label> <input
+												th:field="*{username}" type="text" name="username"
+												class="form-control" id="username"
+												placeholder="Enter Username...">
+										</div>
+										<div class="form-group">
+											<label for="exampleInputPassword1">Password</label> <input
+												th:field="*{password}" type="password" name="password"
+												class="form-control" id="exampleInputPassword1"
+												placeholder="Enter Password...">
+										</div>
+										<div class="form-group mb-0">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" name="terms"
+													class="custom-control-input" id="exampleCheck1"> <label
+													class="custom-control-label" for="exampleCheck1">I
+													agree to the <a href="#">terms of service</a>.
+												</label>
+											</div>
+										</div>
+									</div>
+									<!-- /.card-body -->
+									<div class="card-footer">
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<script th:src="@{/js/plugins.js}"></script>
+	<script>
+		$(window).on("load", function() {
+			$('body').addClass('loaded');
+		});
+	</script>
+	<script th:src="@{plugins/jquery/jquery.min.js}"></script>
+	<!-- Bootstrap 4 -->
+	<script th:src="@{plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<!-- jquery-validation -->
+	<script th:src="@{plugins/jquery-validation/jquery.validate.min.js}"></script>
+	<script th:src="@{plugins/jquery-validation/additional-methods.min.js}"></script>
+	<!-- AdminLTE App -->
+	<script th:src="@{dist/js/adminlte.min.js}"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script th:src="@{dist/js/demo.js}"></script>
+	<!-- Page specific script -->
+	<script>
+		$(function() {
+			$('#quickForm')
+					.validate(
+							{
+								rules : {
+									email : {
+										required : true,
+										email : true,
+									},
+									password : {
+										required : true,
+										minlength : 5
+									},
+									terms : {
+										required : true
+									},
+								},
+								messages : {
+									email : {
+										required : "Please enter a email address",
+										email : "Please enter a valid email address"
+									},
+									password : {
+										required : "Please provide a password",
+										minlength : "Your password must be at least 5 characters long"
+									},
+									terms : "Please accept our terms"
+								},
+								errorElement : 'span',
+								errorPlacement : function(error, element) {
+									error.addClass('invalid-feedback');
+									element.closest('.form-group')
+											.append(error);
+								},
+								highlight : function(element, errorClass,
+										validClass) {
+									$(element).addClass('is-invalid');
+								},
+								unhighlight : function(element, errorClass,
+										validClass) {
+									$(element).removeClass('is-invalid');
+								}
+							});
+		});
+	</script>
+</body>
+</html>

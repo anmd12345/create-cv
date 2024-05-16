@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Quang's CV</title>
+<!-- Load font awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+	integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
+<!-- Load google font -->
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/cvDetails.css}">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script type="text/javascript"
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="wrapper flex" style="background-color: #FFCCFF">
+		<div class="sidebar">
+			<div class="avatar">
+				<img th:src="${cv.avatar}" width="215" height="215"
+					alt="Image Error!" />
+				<h1 class="name" th:text="${cv.firstName + ' ' + cv.lastName}"></h1>
+				<h4>
+					Vị trí ứng tuyển:
+					<h4 class="job" th:text="${cv.viTriUngTuyen}"></h4>
+				</h4>
+			</div>
+			<!-- .avatar -->
+
+			<div class="module">
+				<h3 class="module__title">
+					<i class="fa fa-user circle circle--medium"></i> <span>About
+						Me</span>
+				</h3>
+				<div class="module__content">
+					<p th:text="${cv.about}"></p>
+				</div>
+			</div>
+			<!-- End .module #1 -->
+
+			<div class="module">
+				<h3 class="module__title">
+					<i class="fa fa-address-book-o circle circle--medium"></i> <span>Contact
+						Me</span>
+				</h3>
+				<div class="module__content">
+					<ul>
+						<li class="flex"><i
+							class="fa fa-map-marker circle circle--small circle--white"></i>
+							<div th:text="${cv.address}"></div></li>
+						<br />
+						<li class="flex"><i
+							class="fa fa-globe circle circle--small circle--white"></i>
+							<div th:text="${cv.email}"></div></li>
+						<br>
+						<li class="flex"><i
+							class="fa fa-mobile circle circle--small circle--white"></i>
+							<div th:text="${cv.phone}"></div></li>
+					</ul>
+				</div>
+			</div>
+			<!-- End .module #2 -->
+
+			<div class="module module--progress">
+				<h3 class="module__title">
+					<i class="fa fa-graduation-cap circle circle--medium"></i> <span>My
+						Skills</span>
+				</h3>
+				<div class="module__content">
+					<ul>
+						<li class="flex" th:each="skill : ${skills}"><i
+							th:class="${skill.icon}"></i>
+							<div class="flex--1">
+								<span th:text="${skill.skillName}"></span> <span
+									class="progress-bar"><span style="width: 0%"
+									th:style="${skill.level} != 0 ? 'width:' + ${skill.level} + '%' : 'width: 0%'"></span></span>
+							</div></li>
+					</ul>
+				</div>
+			</div>
+			<!-- End .module #3 -->
+		</div>
+
+		<!-- End .sidebar -->
+		<div class="content">
+			<button style="float: right" type="button"
+				th:attr="onclick='index()'" class="btn btn-danger">Back</button>
+			<div class="section">
+				<h2 class="section__title">
+					<i class="fa fa-briefcase circle circle--large"></i> <span>Work
+						Experience</span>
+				</h2>
+				<div class="section__content">
+					<div class="module" th:each="experiences : ${experiences}">
+						<h3 class="module__title" th:text="${experiences.experiencesName}"></h3>
+						<div class="module__meta">
+							<i class="fa fa-building-o"></i>Location: <span
+								th:text="${experiences.addressWork}"></span><br> <span>Start
+								Time: <i class="fa fa-calendar"></i><span
+								th:text="${experiences.startTime}"> </span>
+							</span> <span>End Time: <i class="fa fa-calendar"></i><span
+								th:text="${experiences.endTime}"> </span></span>
+						</div>
+						<div class="module__content">
+							<p th:text="${experiences.description}"></p>
+						</div>
+					</div>
+					<!-- End .module #4 -->
+				</div>
+				<!-- End .section__content -->
+			</div>
+			<!-- End .section #1 -->
+
+			<div class="section">
+				<h2 class="section__title">
+					<i class="fa fa-language circle circle--large" aria-hidden="true"></i>
+					<span> Language</span>
+
+				</h2>
+				<div class="section__content">
+					<div class="lang flex">
+						<div class="lang__content" th:each="language : ${languages}">
+							<img th:src="${language.imgUrl}" width="133" height="89"
+								alt="English" />
+							<h4 th:text="${language.languageName}"></h4>
+							<input type="hidden" id="index" th:value="${language.level}">
+							<div class="star">
+								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+									class="fa fa-star"></i> <i class="fa fa-star"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End .section__content -->
+			</div>
+			<div
+				th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+				style="display: flex; height: 30px; width: 100px; margin: 0 auto">
+				<div style="width: 50px; height: 30px">
+					<button th:attr="onclick='updatedCV(\'' + ${cv.id} + '\')'"
+						type="button" class="btn-warning"
+						style="cursor: pointer; border-radius: 3px; width: 100%">Sửa</button>
+				</div>
+				<div style="width: 50px; height: 30px">
+					<button th:attr="onclick='deletedCV(\'' + ${cv.id} + '\')'"
+						class="btn-danger"
+						style="cursor: pointer; border-radius: 3px; width: 100%; margin-left: 5px">Xóa</button>
+				</div>
+			</div>
+			<div style="margin-left: 45%"
+				th:if="${session.currentUser.roles.id == 2}">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-success" data-toggle="modal"
+					data-target="#exampleModalCenter">Tuyển dụng</button>
+				<!-- End .section #3 -->
+				<div class="fadeInDown">
+					<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalCenterTitle"
+						aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Thông
+										tin của người tuyển dụng</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div>
+										<span>Họ tên</span>
+									</div>
+									<div>
+										<span>Số điện thoại</span>
+									</div>
+									<div>
+										<span>Email</span>
+									</div>
+									<div>
+										<span>Thời gian phỏng vấn</span>
+									</div>
+									<div>
+										<span>Hình thức phỏng vấn</span>
+									</div>
+									<div>
+										<span>Địa chỉ chi tiết</span>
+									</div>
+									<div>
+										<span>Lời nhắn</span>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<span class="text-danger">Sau khi bấm OK, người ứng
+										tuyển sẽ liên lạc với bạn sớm nhất, hãy kiên nhẫn chờ đợi!</span>
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">OK</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End .content -->
+		</div>
+	</div>
+	<!-- End .wrapper -->
+	<script type="text/javascript">
+		function deletedCV(id) {
+			$.ajax({
+				type : 'GET',
+				url : '/api/cv/delete?id=' + id,
+				dataType : 'json',
+				success : function(data) {
+					window.location.href = '/index';
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		}
+
+		function index() {
+			window.location.href = "/index";
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Chi tiết</title>
+<!-- Load font awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+	integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Load google font -->
+<link href="https://fonts.googleapis.com/css?family=Quicksand"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/fontawesome/css/all.min.css}">
+<link rel="stylesheet" th:href="@{/css/templatemo-style.css}">
+<link rel="stylesheet" th:href="@{/css/personal.css}">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/cvDetails.css}">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/fontawesome/css/all.min.css}">
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script type="text/javascript"
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script type="text/javascript"
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet" th:href="@{/css/cvDetails.css}">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+	<div class="wrapper flex">
+		<div class="sidebar">
+			<div class="avatar">
+				<img th:src="${cv.avatar}" width="215" height="215"
+					alt="Image Error!" /> <br>
+				<div>
+					<span id="fullName" style="font-size: 40px; font-weight: bold"
+						class="name" th:text="${cv.firstName + ' ' + cv.lastName}"></span>
+					<input type="hidden" th:value="${cv.firstName}" id="inp_firstName">
+					<input type="hidden" th:value="${cv.lastName}" id="inp_lastName">
+					<button
+						th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+						type="button" data-toggle="modal"
+						data-target="#modelUpdateFullName"
+						style="width: 30px; height: 30px; border-radius: 50%; border: none; background-color: grey; color: white">
+						<i class="fa fa-pencil-square" style="color: white"></i>
+					</button>
+				</div>
+
+				<h4>Vị trí ứng tuyển:</h4>
+				<span id="viTriUngTuyen"
+					style="font-size: 22px; font-weight: bolder;" class="job"
+					th:text="${cv.viTriUngTuyen}"></span>
+				<button
+					th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+					type="button" data-toggle="modal"
+					data-target="#modelUpdateViTriUngTuyen"
+					style="width: 30px; height: 30px; border-radius: 50%; border: none; background-color: grey; color: white">
+					<i class="fa fa-pencil-square" style="color: white"></i>
+				</button>
+
+			</div>
+			<!-- .avatar -->
+
+			<div class="module">
+				<h3 class="module__title" style="color: white">
+					<i class="fa fa-user circle circle--medium"></i> <span>About
+						Me</span>
+				</h3>
+				<div class="module__content">
+					<span id="aboutMe" th:text="${cv.about}"></span>
+					<button
+						th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+						type="button" data-toggle="modal"
+						data-target="#modelUpdateAboutMe"
+						style="width: 30px; height: 30px; border-radius: 50%; border: none; background-color: grey; color: white">
+						<i class="fa fa-pencil-square" style="color: white"></i>
+					</button>
+				</div>
+			</div>
+			<!-- End .module #1 -->
+
+			<div class="module">
+				<h3 class="module__title">
+					<i class="fa fa-address-book circle circle--medium"></i> <span>Contact
+						Me</span>
+				</h3>
+				<div class="module__content">
+					<ul>
+						<li class="flex"><i
+							class="fa fa-map-marker circle circle--small circle--white"></i>
+							<div id="address" style="margin-right: 10px"
+								th:text="${cv.address}"></div>
+							<button
+								th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+								type="button" data-toggle="modal"
+								data-target="#modelUpdateAddress"
+								style="width: 30px; height: 30px; border-radius: 50%; border: none; background-color: grey; color: white">
+								<i class="fa fa-pencil-square" style="color: white"></i>
+							</button></li>
+						<br />
+						<li class="flex"><i
+							class="fa fa-envelope circle circle--small circle--white"></i>
+							<div id="email" th:text="${cv.email}" style="margin-right: 10px"></div>
+							<button
+								th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+								type="button" data-toggle="modal"
+								data-target="#modelUpdateEmail"
+								style="width: 30px; height: 30px; border-radius: 50%; border: none; background-color: grey; color: white">
+								<i class="fa fa-pencil-square" style="color: white"></i>
+							</button></li>
+						<br>
+						<li class="flex"><i
+							class="fa fa-phone circle circle--small circle--white"></i>
+							<div id="phone" th:text="${cv.phone}" style="margin-right: 10px"></div>
+							<button
+								th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+								type="button" data-toggle="modal"
+								data-target="#modelUpdatePhone"
+								style="width: 30px; height: 30px; border-radius: 50%; border: none; background-color: grey; color: white">
+								<i class="fa fa-pencil-square" style="color: white"></i>
+							</button></li>
+					</ul>
+				</div>
+			</div>
+			<!-- End .module #2 -->
+
+			<div class="module module--progress">
+				<h3 class="module__title">
+					<i class="fa fa-graduation-cap circle circle--medium"></i> <span>My
+						Skills</span>
+				</h3>
+				<div class="module__content" th:each="skill : ${skills}">
+					<ul>
+						<li id="listSkill" class="flex"><i th:class="${skill.icon}"></i>
+							<input id="inp_skillId" type="hidden" th:value="${skill.id}">
+							<div class="flex--1">
+								<span id="span_skillName" th:text="${skill.skillName}"></span> <input
+									type="hidden" id="skillName" th:value="${skill.skillName}"><span
+									class="progress-bar"><span id="span_levelSkill"
+									style="width: 0%"
+									th:style="${skill.level} != 0 ? 'width:' + ${skill.level} + '%' : 'width: 0%'"></span></span>
+								<input type="hidden" id="skillLevel" th:value="${skill.level}">
+							</div>
+							<div class="flex--1" style="margin-top: 10px; margin-left: 5px;">
+								<button
+									th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+									data-toggle="modal" data-target="#updateSkill" type="button"
+									style="width: 30px; height: 30px; border-radius: 50%; background-color: blue; color: white">
+									<i class="fa fa-wrench"></i>
+								</button>
+								<button
+									th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+									type="button"
+									style="width: 30px; background-color: red; height: 30px; border-radius: 50%; color: white"
+									th:attr="onclick='deletedSkill(\'' + ${skill.id} + '\')'">
+									<i class="fa fa-times"></i>
+								</button>
+							</div></li>
+					</ul>
+				</div>
+			</div>
+			<!-- End .module #3 -->
+
+		</div>
+
+		<!-- End .sidebar -->
+		<div class="content">
+			<button style="float: right" type="button"
+				th:attr="onclick='index()'" class="btn btn-danger">Back</button>
+			<div class="section">
+				<h2 class="section__title">
+					<i class="fa fa-briefcase circle circle--large"></i> <span>Work
+						Experience</span>
+				</h2>
+				<div class="section__content">
+					<div class="module" th:each="experiences : ${experiences}">
+						<h3 class="module__title" th:text="${experiences.experiencesName}"></h3>
+						<div class="module__meta">
+							<i class="fa fa-building-o"></i>Location: <span
+								th:text="${experiences.addressWork}"></span><br> <span>Start
+								Time: <i class="fa fa-calendar"></i><span
+								th:text="${experiences.startTime}"> </span>
+							</span> <span>End Time: <i class="fa fa-calendar"></i><span
+								th:text="${experiences.endTime}"> </span></span>
+						</div>
+						<div class="module__content">
+							<p th:text="${experiences.description}"></p>
+						</div>
+						<div class="flex--1" style="margin-top: 10px; margin-left: 5px;">
+							<button
+								th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+								data-toggle="modal" data-target="#updateSkill" type="button"
+								style="width: auto; height: auto; border-radius: 10px; background-color: blue; color: white">
+								Edit <i class="fa fa-align-center"></i>
+							</button>
+							<button
+								th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+								type="button"
+								style="width: auto; background-color: red; height: auto; border-radius: 10px; color: white">
+								Delete <i class="fa fa-eraser"></i>
+							</button>
+						</div>
+					</div>
+					<!-- End .module #4 -->
+				</div>
+				<!-- End .section__content -->
+			</div>
+			<!-- End .section #1 -->
+
+			<div class="section">
+				<h2 class="section__title">
+					<i class="fa fa-language circle circle--large" aria-hidden="true"></i>
+					<span> Language</span>
+
+				</h2>
+				<div class="section__content">
+					<div class="lang flex">
+						<div class="lang__content" th:each="language : ${languages}">
+							<img th:src="${language.imgUrl}" width="133" height="89"
+								alt="English" />
+							<h4 th:text="${language.languageName}"></h4>
+							<input type="hidden" id="index" th:value="${language.level}">
+							<div class="star">
+								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+									class="fa fa-star"></i> <i class="fa fa-star"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div
+				th:if="${ (session.currentUser.id != null) && (cv.user.id == session.currentUser.id && session.currentUser.roles.id == 3) || (session.currentUser.roles.id == 1)}"
+				style="display: flex; height: 30px; width: 100px; margin: 0 auto">
+				<div style="width: 50px; height: 30px"></div>
+				<div style="width: 100px; height: 30px">
+					<button th:attr="onclick='deletedCV(\'' + ${cv.id} + '\')'"
+						class="btn-danger"
+						style="cursor: pointer; border-radius: 3px; width: 100%; height: auto; margin-left: 5px">
+						Xóa <i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+				</div>
+			</div>
+			<div style="margin-left: 45%"
+				th:if="${session.currentUser.roles.id == 2}">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-success" data-toggle="modal"
+					data-target="#tuyenDung">Tuyển dụng</button>
+				<!-- End .section #3 -->
+				<div class="fadeInDown">
+					<div class="modal fade" id="tuyenDung" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Thông
+										tin của người tuyển dụng</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div>
+										<span>Họ tên</span>
+									</div>
+									<div>
+										<span>Số điện thoại</span>
+									</div>
+									<div>
+										<span>Email</span>
+									</div>
+									<div>
+										<span>Thời gian phỏng vấn</span>
+									</div>
+									<div>
+										<span>Hình thức phỏng vấn</span>
+									</div>
+									<div>
+										<span>Địa chỉ chi tiết</span>
+									</div>
+									<div>
+										<span>Lời nhắn</span>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<span class="text-danger">Sau khi bấm OK, người ứng
+										tuyển sẽ liên lạc với bạn sớm nhất, hãy kiên nhẫn chờ đợi!</span>
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">OK</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" id="cvId" th:value="${cv.id}"> <input
+				type="hidden" id="cvName" th:value="${cv.cvName}"> <input
+				type="hidden" id="firstName" th:value="${cv.firstName}"> <input
+				type="hidden" id="lastName" th:value="${cv.lastName}"> <input
+				type="hidden" id="viTriUngTuyen" th:value="${cv.viTriUngTuyen}">
+			<input type="hidden" id="about" th:value="${cv.about}"> <input
+				type="hidden" id="address" th:value="${cv.address}"> <input
+				type="hidden" id="phone" th:value="${cv.phone}"> <input
+				type="hidden" id="email" th:value="${cv.email}">
+			<!-- End .content -->
+		</div>
+	</div>
+	<!-- Model update fullname  -->
+	<div class="modal fade" id="modelUpdateFullName" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"
+						style="font-weight: bold; text-transform: uppercase;">Updated
+						Fullname</h5>
+					<button style="width: 30px; border: none" type="button"
+						class="Close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<textarea th:text="${cv.firstName}"
+						style="padding: 30px; font-size: 20px" id="firstNameUpdate"
+						rows="1" cols="42" placeholder="Enter Firstname..."></textarea>
+					<textarea th:text="${cv.lastName}"
+						style="padding: 30px; font-size: 20px" id="lastNameUpdate"
+						rows="1" cols="42" placeholder="Enter Lastname..."></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button th:attr="onclick='updateFullName(\'' + ${cv.id} + '\')'"
+						class="btn btn-warning" type="button">Updated</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Model update vi tri ung tuyen  -->
+	<div class="modal fade" id="modelUpdateViTriUngTuyen" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"
+						style="font-weight: bold; text-transform: uppercase;">Update
+						Position</h5>
+					<button style="width: 30px; border: none" type="button"
+						class="Close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<textarea th:text="${cv.viTriUngTuyen}"
+						style="padding: 30px; font-size: 20px" id="viTriUngTuyenUpdate"
+						rows="1" cols="42" placeholder="Nhập vị trí ứng tuyển..."></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button
+						th:attr="onclick='updateViTriUngTuyen(\'' + ${cv.id} + '\')'"
+						class="btn btn-warning" type="button">Updated</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modelUpdateAboutMe" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"
+						style="font-weight: bold; text-transform: uppercase;">Update
+						About Me</h5>
+					<button style="width: 30px; border: none" type="button"
+						class="Close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<textarea th:text="${cv.about}"
+						style="padding: 30px; font-size: 20px" id="aboutMeUpdate" rows="1"
+						cols="42" placeholder="Short About Me..."></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button th:attr="onclick='updateAboutMe(\'' + ${cv.id} + '\')'"
+						class="btn btn-warning" type="button">Updated</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modelUpdateAddress" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"
+						style="font-weight: bold; text-transform: uppercase;">Update
+						Your Address</h5>
+					<button style="width: 30px; border: none" type="button"
+						class="Close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<textarea th:text="${cv.address}"
+						style="padding: 30px; font-size: 20px" id="addressUpdate" rows="1"
+						cols="42" placeholder="Enter Address..."></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button th:attr="onclick='updateAddress(\'' + ${cv.id} + '\')'"
+						class="btn btn-warning" type="button">Updated</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modelUpdateEmail" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"
+						style="font-weight: bold; text-transform: uppercase;">Update
+						Your Email</h5>
+					<button style="width: 30px; border: none" type="button"
+						class="Close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<textarea th:text="${cv.email}"
+						style="padding: 30px; font-size: 20px" id="emailUpdate" rows="1"
+						cols="42" placeholder="Enter Email Address..."></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button th:attr="onclick='updateEmail(\'' + ${cv.id} + '\')'"
+						class="btn btn-warning" type="button">Updated</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modelUpdatePhone" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"
+						style="font-weight: bold; text-transform: uppercase;">Update
+						Your Phone</h5>
+					<button style="width: 30px; border: none" type="button"
+						class="Close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<textarea th:text="${cv.phone}"
+						style="padding: 30px; font-size: 20px" id="phoneUpdate" rows="1"
+						cols="42" placeholder="Enter Your Phone..."></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button th:attr="onclick='updatePhone(\'' + ${cv.id} + '\')'"
+						class="btn btn-warning" type="button">Updated</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Model update skill -->
+	<div class="modal fade" id="updateSkill" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Chi tiết về
+						kỹ năng của bạn</h5>
+					<button style="width: 30px; border: none" type="button"
+						class="Close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<span
+						style="margin-left: 2%; margin-right: 2%; color: black; font-weight: bold; font-size: 17px">Nhập
+						kỹ năng của bạn: </span> <input id="inp_skillName"
+						style="margin-bottom: 15px; border-radius: 5px; padding: 20px; height: 50px; width: 50%;"
+						type="text" placeholder="SqlServer, NetBean,..."> <br>
+					<span
+						style="margin-left: 2%; margin-right: 2%; color: black; font-weight: bold; font-size: 17px">
+						Level mà bạn đạt được: </span> <select id="opt"
+						style="width: 230px; height: auto">
+						<option th:value="35">Sơ cấp</option>
+						<option th:value="60">Trung cấp</option>
+						<option th:value="99">Cao cấp</option>
+					</select>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button class="btn btn-success" type="button"
+						th:attr="onclick='updateSkillById()'">Update</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button onclick="printPDF()">Print PDF</button>
+
+   
+	<input type="hidden" id="cv_Id" th:value="${cv.id}">
+	<!-- End .wrapper -->
+	<script type="text/javascript">
+	 function printPDF() {
+	        window.print();
+	    }
+		function deletedCV(id) {
+			var url = '/api/cv/deleted?id=' + id;
+			$.ajax({
+				url : url,
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+					alert("Deleted CV is successfully!");
+					window.location.href = '/index';
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		}
+
+		function index() {
+			window.location.href = '/index'
+		}
+	</script>
+	<script type="text/javascript">
+		function updateFullName(id) {
+			var firstNameUpdate = $('#firstNameUpdate').val();
+			var lastNameUpdate = $('#lastNameUpdate').val();
+			var url = '/api/cv/updateFullName?id=' + id + '&firstName='
+					+ firstNameUpdate + '&lastName=' + lastNameUpdate;
+			$
+					.ajax({
+						url : url,
+						type : 'GET',
+						dataType : 'json',
+						success : function(data) {
+							$('#fullName').text(
+									firstNameUpdate + " " + lastNameUpdate);
+							alert("Updated Fullname successfully!");
+						},
+						error : function(error) {
+							alert(error);
+						}
+					})
+		}
+
+		function updateViTriUngTuyen(id) {
+			var viTriUngTuyenUpdate = $('#viTriUngTuyenUpdate').val();
+			var url = '/api/cv/updateViTriUngTuyen?id=' + id
+					+ '&viTriUngTuyen=' + viTriUngTuyenUpdate;
+			$.ajax({
+				url : url,
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+					$('#viTriUngTuyen').text(viTriUngTuyenUpdate);
+					alert("Updated is successfully!");
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			})
+		}
+
+		function updateAboutMe(id) {
+			var aboutMeUpdate = $('#aboutMeUpdate').val();
+			var url = '/api/cv/updateAboutMe?id=' + id + '&aboutMe='
+					+ aboutMeUpdate;
+			$.ajax({
+				url : url,
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+					$('#aboutMe').text(aboutMeUpdate);
+					alert("Updated is successfully!");
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			})
+		}
+
+		function updateAddress(id) {
+			var addressUpdate = $('#addressUpdate').val();
+			var url = '/api/cv/updateAddress?id=' + id + '&address='
+					+ addressUpdate;
+			$.ajax({
+				url : url,
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+					$('#address').text(addressUpdate);
+					alert("Updated is successfully!");
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			})
+		}
+
+		function updateEmail(id) {
+			var emailUpdate = $('#emailUpdate').val();
+			var url = '/api/cv/updateEmail?id=' + id + '&email=' + emailUpdate;
+			$.ajax({
+				url : url,
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+					$('#email').text(emailUpdate);
+					alert("Updated is successfully!");
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			})
+		}
+
+		function updatePhone(id) {
+			var phoneUpdate = $('#phoneUpdate').val();
+			var url = '/api/cv/updatePhone?id=' + id + '&phone=' + phoneUpdate;
+			$.ajax({
+				url : url,
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+					$('#phone').text(phoneUpdate);
+					alert("Updated is successfully!");
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			})
+		}
+	</script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+		function deletedSkill(id) {
+			var cv_id = $('#cv_Id').val();
+			$.ajax({
+				url : '/api/skill/deleted?id=' + id,
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+					$('#listSkill').replaceWith(data);
+					refresh();
+					alert("Deleted is successfully!");
+					window.location.href = '/details/' + cv_id;
+				},
+				error : function(error) {
+					console(error)
+				}
+			});
+		}
+
+		function refresh() {
+			var id = $('#cv_Id').val();
+			var url = '/api/skill/refresh?id=' + id;
+			$.ajax({
+				url : url,
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			})
+		}
+	</script>
+
+	<script type="text/javascript">
+		function updateSkillById() {
+			var cv_id = $('#cv_Id').val();
+			var id = $('#inp_skillId').val();
+			var level = $('#opt').val();
+			$('#inp_skillName').value = $('#span_skillName').val();
+			var skillName = $('#inp_skillName').val();
+			var url = '/api/skill/updateR?id=' + id + "&skillName=" + skillName
+					+ "&level=" + level;
+			$.ajax({
+				url : url,
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+					$('#span_skillName').text(data.skillName);
+					alert("Update is successfully!");
+					window.location.href = '/details/' + cv_id;
+
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		}
+	</script>
+</body>
+</html>

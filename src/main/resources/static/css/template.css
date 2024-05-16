@@ -1,0 +1,27 @@
+.templateContainer {
+	width: 70%;
+	height: auto;
+	margin: 0 auto;
+	display: flex;
+	border: 1px solid grey;
+	border-radius: 10px;
+	background-color: #fff;
+	box-shadow: 3px 4px 5px 6px grey;
+}
+
+.templateItem {
+	width: 30%;
+	height: auto;
+}
+
+.templateItem img {
+	height: 200px;
+	width: 200px;
+}
+
+.templateItem input {
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	border: 1px solid black;
+}

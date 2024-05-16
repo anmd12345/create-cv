@@ -1,0 +1,28 @@
+.heart {
+  animation: heart 3s linear infinite;
+}
+
+@keyframes heart {
+  0% {
+    color: blue;
+    font-size: 22px;
+  }
+
+  25% {
+    color: red;
+  }
+
+  50% {
+    color: yellow;
+    font-size: 22px;
+  }
+
+  75% {
+    color: rgb(234, 18, 216);
+  }
+
+  100% {
+    color: aqua;
+    font-size: 22px;
+  }
+}

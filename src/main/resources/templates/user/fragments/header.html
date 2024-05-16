@@ -1,0 +1,56 @@
+<h1 class="fill-text">CV TEAMPLATE</h1>
+<!-- <div id="loader-wrapper">
+	<div class="loader-overlay">
+		 <div class="loader-section section-left" style="background: linear-gradient(black, #12c2e9, #fff)"></div>
+		<div class="loader-section section-right" style="background: linear-gradient(black, #12c2e9, #fff)"></div>
+		<div class="loader">
+			<div class="face">
+				<div class="circle"></div>
+			</div>
+			<div class="face">
+				<div class="circle"></div>
+			</div>
+		</div>
+
+	</div>
+
+</div> -->
+<!-- Menu -->
+<nav class="navbar navbar-expand-lg">
+	<div class="container-fluid">
+		<a class="navbar-brand" href=""> <span style="color: yellow">CV</span> <span style="color: red">
+				TEAMPLATE </span><span class="heart">&#10084</span>
+		</a>
+		<div style="margin: 0 auto">
+			<nav>
+				<ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+					<li th:if="${session.currentUser != null}" class="nav-item"><a
+						class="nav-link" th:href="@{/index}">Xin chào <span
+							th:text="${session.currentUser.username}"></span></a></li>
+					<li class="nav-item"><a class="nav-link nav-link-1"
+						th:href="@{/index}">Trang chủ</a></li>
+					<li
+						th:if="${session.currentUser != null && session.currentUser.roles.id == 3}"
+						class="nav-item"><a class="nav-link nav-link-2"
+						th:href="@{/personal}">Tạo CV</span></a></li>
+					<li
+						th:if="${session.currentUser != null && session.currentUser.roles.id == 1}"
+						class="nav-item"><a class="nav-link nav-link-3"
+						th:href="@{/admin}">Quản trị trang</a></li>
+					<li
+						th:if="${session.currentUser != null && session.currentUser.roles.id == 2}"
+						class="nav-item"><a class="nav-link nav-link-3"
+						th:href="@{/createdRecruit}">Tạo tin tuyển dụng</a></li>
+					<li class="nav-item"><a class="nav-link nav-link-4"
+						th:href="recruit">Tin tuyển dụng</a></li>
+					<li th:if="${session.currentUser == null}" class="nav-item"><a
+						class="nav-link nav-link-2" th:href="@{/login}">Đăng Nhập</a></li>
+					<li th:if="${session.currentUser == null}" class="nav-item"><a
+						class="nav-link nav-link-2" th:href="@{/register}">Đăng Ký</a></li>
+					<li th:if="${session.currentUser != null}" class="nav-item"><a
+						class="nav-link nav-link-1" th:href="@{/logout}">Đăng Xuất</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</nav>

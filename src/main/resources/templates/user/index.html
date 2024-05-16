@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width">
+<meta charset="UTF-8">
+<title>Free CV Template</title>
+<th:block th:include="user/fragments/head"></th:block>
+<link rel="stylesheet" href="/css/recruit.css">
+<script src="https://kit.fontawesome.com/ef7e2b893b.js"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<th:block th:include="user/fragments/header"></th:block>
+	<div id="page"
+		style="background-image: linear-gradient(#fff, #12c2e9, #fff); border-radius: 10px">
+		<!-- Search -->
+		<form method="GET" th:action="@{/search}">
+			<div class="tm-hero d-flex justify-content-center align-items-center">
+				<input id="search" name="search"
+					class="form-control tm-search-input"
+					style="border: 1px solid grey; border-top-left-radius: 10px; border-bottom-left-radius: 10px"
+					type="search" placeholder="Tìm kiếm tại đây..." aria-label="Search">
+				<button class="btn btn-outline-success tm-search-btn"
+					style="border-top-right-radius: 10px; border-bottom-right-radius: 10px;"
+					type="submit">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
+		</form>
+		<nav class="navbar navbar-expand-lg">
+			<div class="container-fluid">
+				<div style="margin: 0 auto" th:if="${message != null}">
+					<span class="text-danger" th:text="${message}"></span>&#128543;
+				</div>
+				<ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+					<li th:if="${session.currentUser.roles.id==3}" class="nav-item"><a
+						style="color: red; cursor: pointer" class="nav-link nav-link-2"
+						th:href="@{/myCV}">All My CV</a></li>
+					<li class="nav-item"><a
+						style="color: red; cursor: pointer" class="nav-link nav-link-3"
+						th:href="@{/index}">All CV</a></li>
+					<li th:if="${session.currentUser.roles.id==3}" class="nav-item"><a
+						style="color: red; cursor: pointer" class="nav-link nav-link-2"
+						th:if="${session.currentUser.roles.id==3}" th:href="@{/recruit}">All
+							Recruit</a></li>
+
+				</ul>
+			</div>
+		</nav>
+		<!-- Item -->
+		<div th:if="${session.currentUser.roles.id==2 || session.currentUser.roles.id==3}" id="cv"
+			class="books bookContainer grow" th:each="cv : ${listCV}">
+			<div id="cvDetails"
+				th:attr="onclick='viewCVDetail(\'' + ${cv.id} + '\')'"
+				class="bookContainer grow">
+				<div
+					style="width: 400px; overflow: hidden; text-overflow: ellipsis;">
+					<span class="text-primary" th:text="${cv.cvName}"></span> <img
+						src="https://st.depositphotos.com/1008768/3346/i/950/depositphotos_33464939-stock-photo-more-details-icon.jpg"
+						style="width: 400px; height: 250px; border-radius: 5px; border: 1px solid black; cursor: pointer;">
+				</div>
+			</div>
+		</div>
+
+		<div th:if="${session.currentUser.id==1}" class="content-area"
+			style="margin: 0 auto">
+			<div th:each="recruit: ${recruits}"
+				class="status-field-container write-post-container">
+				<div class="user-profile-box">
+					<div class="user-profile">
+						<img src="/img//user.png" alt="">
+						<div>
+							<p th:text="${recruit.name}"></p>
+							<small th:text="${recruit.createdDate}"></small>
+						</div>
+					</div>
+					<div class="nav-right">
+						<div class="profile-image online" onclick="ContentSettingToggle()">
+							<div th:if="${session.currentUser.id == recruit.user.id}">
+								<div class="profile-image" onclick="ContentSettingToggle()">
+									<i class="fas fa-ellipsis-v"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="contentt-settings">
+						<div class="user-profile">
+							<img src="/img//feedback.png" alt="">
+							<div>
+								<button>Edit</button>
+							</div>
+						</div>
+						<hr>
+						<div class="user-profile">
+							<img src="/img//feedback.png" alt="">
+							<div>
+								<button
+									th:attr="onclick='deletedRecruit(\'' + ${recruit.id} + '\')'">Deleted</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="status-field">
+					<p th:text="${recruit.description}"></p>
+				</div>
+				<div class="post-reaction">
+					<div class="activity-icons">
+						<div>
+							<img src="/img//like.png" alt="">0
+						</div>
+						<div>
+							<img src="/img//comments.png" alt="">0
+						</div>
+						<div>
+							<img src="/img//share.png" alt="">0
+						</div>
+						<div
+							th:if="${session.currentUser.id==2 || session.currentUser.id==1}">
+							<img src="/img//dele.png" alt="">
+							<button
+								th:attr="onclick='editRecruit(\'' + ${recruit.id} + '\')'"
+								style="border: none; background: none">Deteled</button>
+						</div>
+						<div
+							th:if="${session.currentUser.id==2 || session.currentUser.id==1}">
+							<img src="/img//pe.png" alt="">
+							<button
+								th:attr="onclick='deletedRecruit(\'' + ${recruit.id} + '\')'"
+								style="border: none; background: none">Edit</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br> <br> <br> <br>
+		<div style="margin-top: 200px" id="social">
+			<div class="sharethis-inline-share-buttons"></div>
+			<ins class="adsbygoogle" style="display: block"
+				data-ad-client="ca-pub-0641570161571893" data-ad-slot="7571798105"
+				data-ad-format="auto"></ins>
+		</div>
+	</div>
+	<th:block th:include="user/fragments/footer"></th:block>
+	<script>
+		function viewCVDetail(id) {
+			window.location.href = 'http://localhost:8080/details/' + id;
+		}
+	</script>
+	<script type="text/javascript">
+		var userSettings = document.querySelector(".user-settings");
+		var darkBtn = document.getElementById("dark-button");
+		var LoadMoreBackground = document.querySelector(".btn-LoadMore");
+		var contentSetting = document.querySelector(".contentt-settings");
+		function UserSettingToggle() {
+			userSettings.classList.toggle("user-setting-showup-toggle");
+		}
+		// darkBtn.onclick = function(){
+		//	     darkBtn.classList.toggle("dark-mode-on");
+		// }
+
+		function darkModeON() {
+			darkBtn.classList.toggle("dark-mode-on");
+			document.body.classList.toggle("dark-theme");
+		};
+
+		function LoadMoreToggle() {
+			LoadMoreBackground.classList.toggle("loadMoreToggle");
+		};
+
+		function ContentSettingToggle() {
+			contentSetting.classList.toggle("user-setting-showup-toggle");
+		};
+	</script>
+	<script type="text/javascript">
+		function editRecruit(id) {
+			alert(id)
+		}
+		function deletedRecruit(id) {
+			alert(id)
+		}
+	</script>
+</body>
+</html>

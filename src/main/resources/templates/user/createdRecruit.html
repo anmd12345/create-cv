@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width">
+<meta charset="UTF-8">
+<title>Tạo tin tuyển dụng</title>
+<th:block th:include="user/fragments/head"></th:block>
+<link rel="stylesheet"
+	th:href="@{plugins/fontawesome-free/css/all.min.css}">
+<!-- Theme style -->
+<link rel="stylesheet" th:href="@{dist/css/adminlte.min.css}">
+</head>
+<body>
+	<div class="wrapper"
+		style="background-image: linear-gradient(black, #12c2e9, #fff)">
+		<div class="content-wrapper"
+			style="background-image: linear-gradient(black, #12c2e9, #fff)">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6"></div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a th:href="@{/index}">Trang
+										chủ</a></li>
+								<li class="breadcrumb-item active">Tạo tin tuyển dụng</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<!-- left column -->
+						<div class="col-md-12">
+							<!-- jquery validation -->
+							<div class="card card-primary">
+								<div class="card-header">
+									<h3 class="card-title">Tạo tin tuyển dụng</h3>
+								</div>
+								<!-- /.card-header -->
+								<!-- form start -->
+								<div
+									style="background-image: linear-gradient(white, #12c2e9, #fff)">
+									<div class="card-body">
+										<div class="form-group">
+											<label for="des">Mô tả chi tiết. </label><b
+												class="text-danger"><i>Bạn cần nhập đầy đủ thông tin
+													về tên công ty, vị trí tuyển dụng, mức lương,...</i></b>
+											<textarea id="text_description" name="des"
+												class="form-control" rows="10" cols="70" required="required"></textarea>
+										</div>
+									</div>
+									<!-- /.card-body -->
+									<div class="card-footer">
+										<button th:attr="onclick='submitForm()'" type="button"
+											class="btn btn-primary">Submit</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<script th:src="@{/js/plugins.js}"></script>
+	<script>
+		$(window).on("load", function() {
+			$('body').addClass('loaded');
+		});
+	</script>
+	<script th:src="@{plugins/jquery/jquery.min.js}"></script>
+	<!-- Bootstrap 4 -->
+	<script th:src="@{plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<!-- jquery-validation -->
+	<script th:src="@{plugins/jquery-validation/jquery.validate.min.js}"></script>
+	<script th:src="@{plugins/jquery-validation/additional-methods.min.js}"></script>
+	<!-- AdminLTE App -->
+	<script th:src="@{dist/js/adminlte.min.js}"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script th:src="@{dist/js/demo.js}"></script>
+	<script type="text/javascript">
+		function submitForm() {
+			var text = $('#text_description').val();
+			$
+					.ajax({
+						url : '/api/recuit/newRecuit?description=' + text,
+						type : 'GET',
+						dataType : 'json',
+						success : function(data) {
+							alert('Đăng tin thành công!. Nhấn ok để trở về trang tin tuyển dụng.');
+							window.location.href = '/recruit';
+						},
+						error : function(error) {
+							console.log(error);
+						}
+					})
+		}
+	</script>
+	<script type="text/javascript"
+		src="https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js">
+		
+	</script>
+	<!-- <script type="text/javascript">
+		ClassicEditor.create(document.querySelector('#text_description'),{
+			//toolbar:['heading', '|', 'bold', 'italic', 'link']
+		}).then(editor=>{
+			window.editor = editor;
+		}).catch(err=>{
+			console.error(err.stack);
+		});
+	</script> -->
+</body>
+</html>

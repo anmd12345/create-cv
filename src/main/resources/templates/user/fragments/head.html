@@ -1,0 +1,352 @@
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="canonical" href="https://books.goalkicker.com/">
+<link href="https://fonts.googleapis.com/css?family=Quicksand"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/fontawesome/css/all.min.css}">
+<link rel="stylesheet" th:href="@{/css/templatemo-style.css}">
+<link rel="stylesheet" th:href="@{/css/heart.css}">
+<meta name="description"
+	content="Free Programming Books on Android development, C, C#, CSS, HTML5, iOS development, Java, JavaScript, PowerShell, PHP, Python, SQL Sever and more" />
+<meta name="keywords"
+	content="Programming Books,Programming PDF Books,Programming Tutorials,Android development,CSS,HTML5,iOS development,Java,JavaScript,PowerShell,PHP,Python,SQL Server" />
+<meta
+	content="Free Programming Books; HTML5, CSS3, JavaScript, PHP, Python..." />
+<meta content="website" />
+<meta content="https://books.goalkicker.com/goalkicker_books.png" />
+<meta content="https://books.goalkicker.com/" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+<link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+<script>
+	function submitForm() {
+		var nameValue = document.getElementById("name").value;
+		var emailValue = document.getElementById("email").value;
+		var http = new XMLHttpRequest();
+		var url = "../sendEmail.php";
+		var params = "message="
+				+ encodeURIComponent(nameValue + ":" + emailValue + ":"
+						+ window.location);
+		http.open("POST", url, true);
+		http.setRequestHeader("Content-type",
+				"application/x-www-form-urlencoded");
+		http.onreadystatechange = function() {
+			if (http.readyState == 4 && http.status == 200) {
+				alert("Success");
+			}
+		}
+		http.send(params);
+
+		return false;
+	}
+</script>
+<script async
+	src="https://www.googletagmanager.com/gtag/js?id=UA-111565129-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-111565129-1');
+</script>
+<style>
+.bmc-button img {
+	height: 34px !important;
+	width: 35px !important;
+	margin-bottom: 1px !important;
+	box-shadow: none !important;
+	border: none !important;
+	vertical-align: middle !important;
+}
+
+.bmc-button {
+	padding: 7px 10px 7px 10px !important;
+	line-height: 35px !important;
+	height: 51px !important;
+	min-width: 217px !important;
+	text-decoration: none !important;
+	display: inline-flex !important;
+	color: #ffffff !important;
+	background-color: #3498db !important;
+	border-radius: 5px !important;
+	border: 1px solid transparent !important;
+	padding: 7px 10px 7px 10px !important;
+	font-size: 20px !important;
+	letter-spacing: 0.6px !important;
+	box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+	-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+	margin: 0 auto !important;
+	font-family: 'Arial', cursive !important;
+	-webkit-box-sizing: border-box !important;
+	box-sizing: border-box !important;
+	-o-transition: 0.3s all linear !important;
+	-webkit-transition: 0.3s all linear !important;
+	-moz-transition: 0.3s all linear !important;
+	-ms-transition: 0.3s all linear !important;
+	transition: 0.3s all linear !important;
+}
+
+.bmc-button:hover, .bmc-button:active, .bmc-button:focus {
+	-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+	text-decoration: none !important;
+	box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+	opacity: 0.85 !important;
+	color: #ffffff !important;
+}
+</style>
+<script data-name="BMC-Widget"
+	src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+	data-id="GoalKickerBooks"
+	data-description="Support GoalKicker Books Buy a coffee!"
+	data-message="Thank you for visiting. You can now buy me a coffee!"
+	data-color="#3498DB" data-position="right" data-x_margin="18"
+	data-y_margin="18"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<style type="text/css">
+.grow {
+	transition: all .3s ease-in-out;
+	transform: scale(0.9);
+}
+
+.grow:hover, .grow:focus {
+	transform: scale(1);
+}
+
+.loader-overlay{
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#000, grey, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loader {
+  width: 6em;
+  height: 6em;
+  font-size: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader .face {
+  position: absolute;
+  border-radius: 50%;
+  border-style: solid;
+  animation: animate023845 3s linear infinite;
+}
+
+.loader .face:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  color: gold;
+  border-color: currentColor transparent transparent currentColor;
+  border-width: 0.2em 0.2em 0em 0em;
+  --deg: -45deg;
+  animation-direction: normal;
+}
+
+.loader .face:nth-child(2) {
+  width: 70%;
+  height: 70%;
+  color: lime;
+  border-color: currentColor currentColor transparent transparent;
+  border-width: 0.2em 0em 0em 0.2em;
+  --deg: -135deg;
+  animation-direction: reverse;
+}
+
+.loader .face .circle {
+  position: absolute;
+  width: 50%;
+  height: 0.1em;
+  top: 50%;
+  left: 50%;
+  background-color: transparent;
+  transform: rotate(var(--deg));
+  transform-origin: left;
+}
+
+.loader .face .circle::before {
+  position: absolute;
+  top: -0.5em;
+  right: -0.5em;
+  content: '';
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 2em,
+                0 0 4em,
+                0 0 6em,
+                0 0 8em,
+                0 0 10em,
+                0 0 0 0.5em rgba(255, 255, 0, 0.1);
+}
+
+@keyframes animate023845 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.books {
+	margin: auto;
+	padding-bottom: 50px;
+	padding-top: 20px;
+}
+
+.bookContainer img {
+	box-shadow: 0px 0px 18px 0px #666666;
+	margin-bottom: 5px;
+}
+
+body, html {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+body {
+	text-align: center;
+	font-family: 'Quicksand', sans-serif;
+	background-color: #eeeeee;
+}
+
+h1, h2 {
+	margin: 0px;
+}
+
+.input-group.md-form.form-sm.form-1 input {
+	border: 1px solid #bdbdbd;
+	border-top-right-radius: 0.25rem;
+	border-bottom-right-radius: 0.25rem;
+}
+
+.input-group.md-form.form-sm.form-2 input {
+	border: 1px solid #bdbdbd;
+	border-top-left-radius: 0.25rem;
+	border-bottom-left-radius: 0.25rem;
+}
+
+.input-group.md-form.form-sm.form-2 input.red-border {
+	border: 1px solid #ef9a9a;
+}
+
+.input-group.md-form.form-sm.form-2 input.lime-border {
+	border: 1px solid #cddc39;
+}
+
+.input-group.md-form.form-sm.form-2 input.amber-border {
+	border: 1px solid #ffca28;
+}
+
+#page {
+	margin: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 40px;
+	background-color: #ffffff;
+	max-width: 1100px;
+}
+
+.bookContainer {
+	display: inline-block;
+}
+
+#toggle {
+	display: none;
+	background: #353b48;
+	color: #fff;
+	text-align: right;
+	padding: 10px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+	#footer {
+		height: 80px;
+	}
+	#footerBackground {
+		height: 80px;
+	}
+	#toggle {
+		display: block;
+	}
+	.grow {
+		transform: scale(0.9);
+	}
+}
+
+.latest-news {
+	width: 400px;
+	margin: auto;
+	text-align: left;
+}
+
+.latest-news p {
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+button.signup {
+	background-color: #3498db;
+	text-decoration: underline;
+	color: #ffffff;
+	border-radius: 10px;
+	width: 200px;
+	height: 60px;
+	border: 0px;
+	cursor: pointer;
+	transform: scale(0.9);
+	transition: all .1s ease-in-out;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+button:hover {
+	transform: scale(1);
+}
+
+.user-signup input {
+	width: 250px;
+	border: 1px solid #3498db;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.user-signup th {
+	text-align: right;
+}
+
+body{
+	background: #000;
+    place-items: center;
+
+}
+
+.fill-text {
+	color: #000;
+	font-size: 3vw;
+	font-weight: bold;
+	background-image: linear-gradient(#12c2e9, #c471ed, red);
+	background-clip: text;
+	color: transparent;
+	background-size: 0% 100%, 100% 100%;
+	background-repeat: no-repeat, no-repeat;
+	animation: fill 3s linear infinite;
+	-webkit-background-clip: text;
+}
+
+@keyframes fill {to { background-size:100%100%, 100%100%;
+	
+}
+}
+</style>
+<script
+	src="https://platform-api.sharethis.com/js/sharethis.js#property=5e8a6464e4eaeb0019f2d511&product=inline-share-buttons"
+	async="async"></script>

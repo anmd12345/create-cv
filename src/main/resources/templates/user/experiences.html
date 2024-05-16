@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Experiences Details</title>
+<link rel="stylesheet" th:href="@{/css/personal.css}">
+<th:block th:include="user/fragments/head"></th:block>
+<style type="text/css">
+input {
+	border: 2px solid;
+	border-radius: 4px;
+	font-size: 1rem;
+	margin: 0.25rem;
+	min-width: 125px;
+	padding: 0.5rem;
+	transition: background-color 0.5s ease-out;
+}
+
+input:optional {
+	border-color: gray;
+}
+
+input:required:valid {
+	border-color: green;
+}
+
+input:invalid {
+	border-color: red;
+}
+
+input:required:focus:valid {
+	background:
+		url("https://assets.digitalocean.com/labs/icons/hand-thumbs-up.svg")
+		no-repeat 95% 50% lightgreen;
+	background-size: 25px;
+}
+
+input:focus:invalid {
+	background:
+		url("https://assets.digitalocean.com/labs/icons/exclamation-triangle-fill.svg")
+		no-repeat 95% 50% lightsalmon;
+	background-size: 25px;
+}
+
+textarea:hover {
+	border: 3px solid green;
+}
+</style>
+</head>
+<body style="color: white">
+	<th:block th:include="user/fragments/header"></th:block>
+	<!--Personal-->
+	<div class="personal">
+		<div class="group-step">
+			<div class="text" style="font-style: italic; cursor: pointer;">
+				<span style="font-style: none; color: grey; cursor: pointer;">Personal
+					details</span> --> <span
+					style="font-style: none; color: grey; cursor: pointer;">Skill</span>
+				--> <a th:href="@{/experiences}">Work Experiences</a>
+			</div>
+		</div>
+		<hr>
+		<form method="POST" th:action="@{/experiences}"
+			th:object="${exRequest}">
+
+			<div class="text-right"
+				style="width: 100%; height: 100%; margin: 0 auto">
+				<span class="text" style="margin-bottom: 7px; margin-right: 59%;">Nhập
+					tên công việc*:</span> <input type="text" required
+					style="width: 700px; margin-bottom: 20px; height: 50px; margin-right: 25%; border-radius: 10px; padding: 10px"
+					th:field="*{experiencesName}" placeholder="IOS Developer,...">
+			</div>
+
+			<label style="font-weight: bold; font-size: 20px; margin-right: 32%">
+				Mô tả công việc: </label>
+			<div class="text-right">
+				<textarea
+					style="margin-bottom: 20px; margin-right: 25%; border-radius: 10px; padding: 10px"
+					cols="83" rows="5" placeholder="Mô tả ngắn về công việc này"
+					th:field="*{description}"></textarea>
+			</div>
+
+			<div class="text">
+				<div class="text-right">
+					<span style="margin-right: 65%"> Nơi làm việc: </span> <input
+						style="width: 700px; margin-bottom: 20px; height: 50px; margin-right: 26%; border-radius: 10px; padding: 10px"
+						placeholder="Vietnam, USA, Nga, ..." type="text"
+						th:field="*{addressWork}">
+				</div>
+			</div>
+			<div class="text" style="display: flex; margin-left: 22%">
+				<div class="text-right" style="margin-right: 100px">
+					<span style="margin-right: 30%;"> Thời gian bắt đầu: </span> <input
+						style="width: 230px; margin-bottom: 20px; height: 50px; margin-right: 17%; border-radius: 10px; padding: 10px"
+						placeholder="1,2,3,4..." required type="date"
+						th:field="*{startTime}">
+				</div>
+				<div class="text-right">
+					<span style="margin-right: 30%;"> Thời gian kết thúc: </span> <input
+						style="width: 230px; margin-bottom: 20px; height: 50px; margin-right: 27%; border-radius: 10px; padding: 10px"
+						placeholder="1,2,3,4..." required type="date"
+						th:field="*{endTime}">
+				</div>
+			</div>
+			<button
+				style="color: white; border-radius: 5px; width: auto; height: 50px; margin-bottom: 20px"
+				class="btn-warning" type="submit">Thêm kinh nghiệm làm
+				việc++</button>
+			<br>
+		</form>
+		<!--Button-->
+		<div class="button-next">
+			<button th:attr="onclick='submit()'" style="height: 60px"
+				type="button">Đăng tải CV</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function submit(){
+			alert("Đăng tải CV thành công! Nhấn OK để trở về trang chủ");
+			window.location.href = "http://localhost:8080/index";
+		}
+	</script>
+	<footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer"
+		style="background-color: black">
+		<div class="container-fluid tm-container-small">
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-4 px-5 mb-5">
+					<h3 class="tm-text-primary mb-4 tm-footer-title">About Website</h3>
+					<p>Website tạo cv chất lượng ^^</p>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 col-6 px-5 mb-5">
+					<h3 class="tm-text-primary mb-4 tm-footer-title">Our Links</h3>
+					<ul class="tm-footer-links pl-0">
+						<li>Mọi thắc mắc về website vui lòng phản hồi về gmail:</li>
+						<li><a href="https://mail.google.com/">
+								email123@gmail.com</a></li>
+
+					</ul>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-6 col-6 px-5 mb-5">
+					<ul class="tm-social-links d-flex justify-content-end pl-0 mb-5">
+						<li class="mb-2"><a href="https://www.facebook.com"><i
+								class="fab fa-facebook"></i></a></li>
+						<li class="mb-2"><a href="https://twitter.com"><i
+								class="fab fa-twitter"></i></a></li>
+						<li class="mb-2"><a href="https://instagram.com"><i
+								class="fab fa-instagram"></i></a></li>
+						<li class="mb-2"><a href="https://pinterest.com"><i
+								class="fab fa-pinterest"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-md-7 col-12 px-5 mb-3"></div>
+				<div class="col-lg-4 col-md-5 col-12 px-5 text-right">
+					Designed by: <a
+						href="https://www.facebook.com/profile.php?id=100015156427593"
+						class="tm-text-gray" rel="sponsored" target="_parent"
+						style="color: red">AnnCutee</a><span class="heart">&#10084</span>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script type="text/javascript"
+		src="https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js">
+	</script>
+	<script type="text/javascript">
+		ClassicEditor.create(document.querySelector('#txt_details'),{
+			//toolbar:['heading', '|', 'bold', 'italic', 'link']
+		}).then(editor=>{
+			window.editor = editor;
+		}).catch(err=>{
+			console.error(err.stack);
+		});
+	</script>
+</body>
+</html>

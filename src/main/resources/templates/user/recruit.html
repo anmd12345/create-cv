@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width">
+<meta charset="UTF-8">
+<title>Tin tuyển dụng</title>
+<th:block th:include="user/fragments/head"></th:block>
+<link rel="stylesheet" href="/css/recruit.css">
+<script src="https://kit.fontawesome.com/ef7e2b893b.js"
+	crossorigin="anonymous"></script>
+<style type="text/css">
+.disabled {
+	pointer-events: none;
+	background-color: #e9ecef;
+	color: #6c757d;
+}
+</style>
+</head>
+<body>
+
+	<nav class="navbar">
+		<div class="nav-left">
+			<h4 class="logo">CV FREE TEAMPLATE</h4>
+		</div>
+		<div class="nav-right">
+			<div class="search-box">
+				<img src="/img//search.png" alt=""> <input type="text"
+					placeholder="Search">
+			</div>
+			<div class="profile-image online" onclick="UserSettingToggle()">
+				<img src="/img//user.png" alt="">
+			</div>
+		</div>
+		<div class="user-settings">
+			<div class="profile-darkButton">
+				<div class="user-profile">
+					<img src="/img//user.png" alt="">
+					<div>
+						<p>Alex Carry</p>
+						<a href="#">See your profile</a>
+					</div>
+				</div>
+				<div id="dark-button" onclick="darkModeON()">
+					<span></span>
+				</div>
+			</div>
+			<hr>
+			<div class="user-profile">
+				<img src="/img//feedback.png" alt="">
+				<div>
+					<p>Give Feedback</p>
+					<a href="#">Help us to improve</a>
+				</div>
+			</div>
+			<hr>
+			<div class="settings-links">
+				<img src="/img//setting.png" alt="" class="settings-icon"> <a
+					href="#">Settings & Privary <img src="/img//arrow.png" alt=""></a>
+			</div>
+
+			<div class="settings-links">
+				<img src="/img//help.png" alt="" class="settings-icon"> <a
+					href="#">Help & Support <img src="/img//arrow.png" alt=""></a>
+			</div>
+
+			<div class="settings-links">
+				<img src="/img//Display.png" alt="" class="settings-icon"> <a
+					href="#">Display & Accessibility <img src="/img//arrow.png"
+					alt=""></a>
+			</div>
+
+			<div class="settings-links">
+				<img src="/img//logout.png" alt="" class="settings-icon"> <a
+					href="/logout">Logout <img src="/img//arrow.png" alt=""></a>
+			</div>
+
+		</div>
+	</nav>
+
+
+	<div class="container">
+		<div class="left-sidebar">
+			<div class="important-links">
+				<a href="/index"><img src="/img//trchu.png" alt="">Trang
+					chủ</a> <a><img
+					src="/img//hello.png" alt="">Xin chào &nbsp<span
+					th:text="${session.currentUser.username}"></span> </a> <a
+					th:href="@{/personal}"
+					th:if="${session.currentUser != null && session.currentUser.roles.id == 3}"><img
+					src="/img//add.png" alt="">Tạo CV</a> <a
+					th:if="${session.currentUser != null && session.currentUser.roles.id == 1}"
+					th:href="@{/admin}">Quản trị trang</a> <a
+					th:href="@{/createdRecruit}"
+					th:if="${session.currentUser != null && session.currentUser.roles.id == 2}"><img
+					src="/img//add.png" alt="">Tạo tin tuyển dụng</a> <a
+					th:href="recruit"><img src="/img//recruit.png" alt="">Tin
+					tuyển dụng</a> <a th:href="@{/login}"
+					th:if="${session.currentUser == null}">Đăng Nhập</a> <a
+					th:if="${session.currentUser == null}" th:href="@{/register}">Đăng
+					Ký</a> <a th:href="@{/logout}" th:if="${session.currentUser != null}"><img
+					src="/img//logout.png" alt="">Đăng Xuất</a>
+
+			</div>
+		</div>
+		<div class="content-area" style="margin: 0 auto">
+			<div th:each="recruit: ${recruits}"
+				class="status-field-container write-post-container">
+				<div class="user-profile-box">
+					<div class="user-profile">
+						<img src="/img//user.png" alt="">
+						<div>
+							<p th:text="${recruit.name}"></p>
+							<small th:text="${recruit.createdDate}"></small>
+						</div>
+					</div>
+					<div class="nav-right">
+						<div class="profile-image online" onclick="ContentSettingToggle()">
+							<div th:if="${session.currentUser.id == recruit.user.id}">
+								<div class="profile-image" onclick="ContentSettingToggle()">
+									<i class="fas fa-ellipsis-v"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="status-field">
+					<textarea id="textarea-text" class="form-control disabled" rows="7"
+						cols="70" required="required" th:text="${recruit.description}"></textarea>
+				</div>
+				<div class="post-reaction">
+					<div class="activity-icons">
+						<div>
+							<img src="/img//like.png" alt="">0
+						</div>
+						<div>
+							<img src="/img//comments.png" alt="">0
+						</div>
+						<div>
+							<img src="/img//share.png" alt="">0
+						</div>
+						<div th:if="${session.currentUser.id==recruit.user.id}">
+							<div
+								th:if="${session.currentUser.roles.id==2 || session.currentUser.roles.id==1}">
+								<img src="/img//dele.png" alt="">
+								<button
+									th:attr="onclick='deletedRecruit(\'' + ${recruit.id} + '\')'"
+									style="border: none; background: none">Deteled</button>
+							</div>
+						</div>
+						<div th:if="${session.currentUser.id==recruit.user.id}">
+							<div
+								th:if="${session.currentUser.roles.id==2 || session.currentUser.roles.id==1}">
+								<img src="/img//pe.png" alt="">
+								<button type="button" id="btn-edit"
+									th:attr="onclick='disable()'"
+									style="border: none; background: none" value="">Edit</button>
+
+							</div>
+						</div>
+						<div th:if="${session.currentUser.id==recruit.user.id}">
+							<div id="myElement" class="sr-only"
+								th:if="${session.currentUser.roles.id==2 || session.currentUser.roles.id==1}">
+								<img src="/img//update.jpg" alt="">
+								<button type="button" id="btn-update"
+									th:attr="onclick='updateRecruit(\'' + ${recruit.id} + '\')'"
+									style="border: none; background: none" value="">Update</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<script type="text/javascript">
+		var userSettings = document.querySelector(".user-settings");
+		var darkBtn = document.getElementById("dark-button");
+		var LoadMoreBackground = document.querySelector(".btn-LoadMore");
+		var contentSetting = document.querySelector(".contentt-settings");
+		function UserSettingToggle() {
+			userSettings.classList.toggle("user-setting-showup-toggle");
+		}
+		// darkBtn.onclick = function(){
+		//	     darkBtn.classList.toggle("dark-mode-on");
+		// }
+
+		function darkModeON() {
+			darkBtn.classList.toggle("dark-mode-on");
+			document.body.classList.toggle("dark-theme");
+		};
+
+		function LoadMoreToggle() {
+			LoadMoreBackground.classList.toggle("loadMoreToggle");
+		};
+
+		function ContentSettingToggle() {
+			contentSetting.classList.toggle("user-setting-showup-toggle");
+		};
+	</script>
+	<script type="text/javascript">
+		function deletedRecruit(id) {
+			var url = '/api/recuit/deleted?id=' + id;
+			$.ajax({
+				url : url,
+				type : 'get',
+				dataType : 'json',
+				success : function(data) {
+					alert('Deleted is successfully!');
+					window.location.href = '/recruit';
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		};
+
+		function disable() {
+			var input = document.querySelector('.disabled');
+			input.classList.remove('disabled');
+			var input = document.querySelector('#myElement');
+			input.classList.remove('sr-only');
+		};
+
+		function updateRecruit(id) {
+			var text = $('#textarea-text').val();
+			var url = '/api/recuit/update?id=' + id + '&description=' + text;
+			$.ajax({
+				url : url,
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+					alert("Updated is successfully!");
+					window.location.href = '/recruit';
+				},
+				error : function(error) {
+					alert(error);
+				}
+
+			});
+		}
+	</script>
+</body>
+</html>

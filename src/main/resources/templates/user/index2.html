@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+<link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+</head>
+
+<body>
+	<header class="l-header" id="header">
+		<nav class="nav bd-container">
+			<a href="" class="nav__logo">Smith</a>
+			<div class="nav__menu" id="nav-menu">
+				<ul class="nav__list">
+					<li class="nav__item"><a href="" class="nav__link active-link">
+							<i class="bx bx-home nav__icon"></i>Home
+					</a></li>
+
+					<li class="nav__item"><a href="" class="nav__link"> <i
+							class="bx bx-user nav__icon"></i>Profile
+					</a></li>
+
+					<li class="nav__item"><a href="" class="nav__link"> <i
+							class="bx bx-book nav__icon"></i>Education
+					</a></li>
+
+					<li class="nav__item"><a href="" class="nav__link"> <i
+							class="bx bx-receipt nav__icon"></i>Skills
+					</a></li>
+
+					<li class="nav__item"><a href="" class="nav__link"> <i
+							class="bx bx-briefcase-alt nav__icon"></i>Experience
+					</a></li>
+
+					<li class="nav__item"><a href="" class="nav__link"> <i
+							class="bx bx-award nav__icon"></i>Certificates
+					</a></li>
+
+					<li class="nav__item"><a href="" class="nav__link"> <i
+							class="bx bx-link-external nav__icon"></i>References
+					</a></li>
+				</ul>
+			</div>
+
+			<div class="nav__toggle" id="nav-toggle">
+				<i class="bx bx-grid-alt nav__icon"></i>References
+			</div>
+		</nav>
+	</header>
+	<main class="l-main bd-container">
+		<div class="resume" id="area-cv">
+			<div class="resume__left">
+				<section class="home" id="home">
+					<div class="home_container section bd-grid">
+						<div class="home_data bd-grid">
+							<img src="assets/img/a.jpg" alt="" class="home_img">
+							<h1 class="home_title">
+								VÕ <b>HOÀNG ÂN</b>
+							</h1>
+							<h3 class="home_profession">Back-End Developer</h3>
+							<div>
+								<a download="" href="assets/pdf/ResumeCv.pdf"
+									class="home__button-movil">Down Load</a>
+							</div>
+						</div>
+
+						<section class="profile home_information" id="profile">
+							<span style="font-size: 18px; font-weight: bold;">GIỚI
+								THIỆU</span>
+							<ul style="list-style: disc; margin-top: 10px">
+								<li class="profile__description">Tôi là Võ Hoàng Ân, năm
+									nay 18 tuổi, hiện là sinh viên năm nhất.</li>
+								<li class="profile__description">Tôi đã có 4 dự án liên
+									quan đến xây dựng website.</li>
+								<li class="profile__description">Thành thạo ngôn ngữ lập
+									trình Java, C++, C#, Html, Css, JavaScript.</li>
+								<li class="profile__description">Thành thạo hệ quản trị cơ
+									sở dữ liệu Sql Server</li>
+								<li class="profile__description">Framework sử dụng chủ yếu
+									là Spring Boot</li>
+								<li class="profile__description">Đã sử dụng qua Google Api
+									và Sms Api</li>
+							</ul>
+						</section>
+						
+						<section class="profile home_information" id="profile">
+							<span style="font-size: 18px; font-weight: bold;">MỤC TIÊU NGHỀ NGHIỆP</span>
+							<p class="certificate__description">Từ kiến thức sẵn có trong vòng 1,5 năm lên được level Senior và trở thành Full-Stack Developer</p>
+						</section>
+
+						<div class="bd-grid">
+							<span style="font-size: 18px; font-weight: bold">THÔNG TIN</span>
+							<span class="home_information"> <i
+								class='bx bx-map home_icon'></i> Thủ Dầu - Một Bình Dương
+							</span> <span class="home_information"> <i
+								class='bx bx-envelope home_icon'></i> anvohoang98@gmail.com
+							</span> <span class="home_information"> <i
+								class='bx bx-phone home_icon'></i> 0333. 111. 777
+							</span>
+						</div>
+					</div>
+					<i class="bx bx-moon change-theme" title="Theme" id="theme-button"></i>
+
+					<i class='bx bx-download generate-pdf' title="Generate PDF"
+						id="resume-button"></i>
+				</section>
+
+
+				</a>
+				<!-- <section class="social section">
+					<h2 class="section-title">SOCIAL</h2>
+					<div class="social__container bd-grid">
+						<a href="" target="_blank" class="social__link"> <i
+							class='bx bxl-linkedin-square social__icon'></i> @smithmat
+						</a> <a href="" target="_blank" class="social__link"> <i
+							class='bx bxl-facebook social__icon'></i> @smithmat
+						</a> <a href="" target="_blank" class="social__link"> <i
+							class='bx bxl-instagram social__icon'></i> @smithmat
+						</a>
+					</div>
+				</section> -->
+
+
+
+				<section class="education" id="education">
+					<span class="section" style="font-size: 18px; font-weight: bold">TRƯỜNG
+						HỌC</span>
+					<div class="education__container bd-grid">
+						<div class="education__content">
+							<div class="education__time">
+								<span class="education__rounder"></span> <span
+									class="education__line"></span>
+							</div>
+							<div class="education__data bd-grid">
+								<h3 class="education__title">Đại học Thủ Dầu Một</h3>
+								<span class="education__studies">Đang học</span> <span
+									class="education__year">2021 - 2026</span>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="resume__right">
+				<section class="education section" id="education">
+					<span style="font-size: 18px; font-weight: bold">GIẢI THƯỞNG</span>
+					<div class="education__container bd-grid">
+						<div class="education__content">
+							<div class="education__time">
+								<span class="education__rounder"></span> <span
+									class="education__line"></span>
+							</div>
+							<div class="education__data bd-grid">
+								<h3 class="education__title">Thi lập trình cấp trường</h3>
+								<span class="education__studies">1 Giải thưởng</span> <span
+									class="education__year">04 - 06 - 2021</span>
+							</div>
+						</div>
+						<div class="education__content">
+							<div class="education__time">
+								<span class="education__rounder"></span>
+
+							</div>
+							<div class="education__data bd-grid">
+								<h3 class="education__title">Ngiên cứu khoa học</h3>
+								<span class="education__studies">2 giải thưởng</span> <span
+									class="education__year">03/2021 - 09/2022</span>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="skills" id="skills">
+					<span style="font-size: 18px; font-weight: bold">KỸ NĂNG</span>
+					<div class="skills__content bd-grid">
+						<ul class="skills__data">
+							<li class="skills__name"><span class="skills__circle"></span>Html
+								(Basic)</li>
+							<li class="skills__name"><span class="skills__circle"></span>Css
+								(Basic)</li>
+							<li class="skills__name"><span class="skills__circle"></span>Java
+								Script (Midle)</li>
+							<li class="skills__name"><span class="skills__circle"></span>Java
+								(Master)</li>
+						</ul>
+						<ul class="skills__data">
+							<li class="skills__name"><span class="skills__circle"></span>Jstl
+								(Master)</li>
+							<li class="skills__name"><span class="skills__circle"></span>
+								Thymleaf (Master)</li>
+							<li class="skills__name"><span class="skills__circle"></span>FireBase
+								(Basic)</li>
+							<li class="skills__name"><span class="skills__circle"></span>Sql
+								Server (Master)</li>
+						</ul>
+					</div>
+				</section>
+				<section class="experience" id="experience">
+					<span style="font-size: 20px; font-weight: bold">DỰ ÁN</span>
+					<div class="experience__container bd-grid">
+						<div class="experience__content">
+							<div class="experience__time">
+								<span class="experience__rounder"></span> <span
+									class="experience__line"></span>
+							</div>
+							<div class="experience__data bd-grid">
+								<h3 class="experience__title">Website tạo CV và tìm việc
+									làm</h3>
+								<span class="experience__company" style="font-weight: bold">Công
+									nghệ và ngôn ngữ sử dụng</span>
+								<ul class="skills__data">
+									<li><span class="skills__circle"></span>Jsp/servlet</li>
+									<li><span class="skills__circle"></span>Jstl</li>
+									<li><span class="skills__circle"></span>Microsoft Sql
+										Server</li>
+									<li><span class="skills__circle"></span>Java</li>
+									<li><span class="skills__circle"></span>Html, Css,
+										JavaScript</li>
+								</ul>
+							</div>
+						</div>
+						<div class="experience__content">
+							<div class="experience__time">
+								<span class="experience__rounder"></span>
+
+							</div>
+							<div class="experience__data bd-grid">
+								<h3 class="experience__title">Hệ thống học tập của trường
+									THPT TX Bình Long(Đang tiến hành)</h3>
+								<span class="experience__company" style="font-weight: bold">Công
+									nghệ và ngôn ngữ sử dụng</span>
+								<ul class="skills__data">
+									<li><span class="skills__circle"></span>Thymleaf</li>
+									<li><span class="skills__circle"></span>Java</li>
+									<li><span class="skills__circle"></span>Spring Boot
+										Framework</li>
+									<li><span class="skills__circle"></span>Microsoft Sql
+										Server</li>
+									<li><span class="skills__circle"></span>Ajax, Bootstrap</li>
+									<li><span class="skills__circle"></span>Gmail Api, Sms Api</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- <section class="certificate section" id="certificates">
+					<h2 class="section-title">Certificates</h2>
+					<div class="certificate__container bd-grid">
+						<div class="certificate__content">
+							<h3 class="certificate__title">tiềm năng mỗi ngày</h3>
+							<p class="certificate__description">tiềm năng mỗi ngày</p>
+						</div>
+
+						<div class="certificate__content">
+							<h3 class="certificate__title">tiềm năng mỗi ngày</h3>
+							<p class="certificate__description">tiềm năng mỗi ngày</p>
+						</div>
+
+						<div class="certificate__content">
+							<h3 class="certificate__title">T Messagợ doanh nghiệp và
+								người kinh doanh triển khai các chiến</h3>
+							<p class="certificate__description">Trở thành "một trong
+								những đối tác đầu tiên" của Google</p>
+						</div>
+					</div>
+				</section> -->
+
+				<!-- <section class="references section" id="references">
+					<h2 class="section__title">References</h2>
+					<div class="references__container bd-grid">
+						<div class="references__content bd-grid">
+							<span class="references__subtitle">Sr. Director</span>
+							<h3 class="references__title">Sr. Director</h3>
+							<ul class="references__contact">
+								<li>Phone: 999-777-666</li>
+								<li>Email: user@email.com</li>
+							</ul>
+						</div>
+						<div class="references__content bd-grid">
+							<span class="references__subtitle">Mr. Devops</span>
+							<h3 class="references__title">Mr. Devops</h3>
+							<ul class="references__contact">
+								<li>Phone: 999-777-666</li>
+								<li>Email: user@email.com</li>
+							</ul>
+						</div>
+					</div>
+				</section> -->
+
+				<section class="languages">
+					<span style="font-size: 20px; font-weight: bold">CHỨNG CHỈ</span>
+					<div class="languages__container">
+						<ul class="languages__content bd-grid">
+							<li class="languages__name"><span class="languages__circle"></span>
+								Tiếng Anh Cơ Bản</li>
+						</ul>
+					</div>
+				</section>
+
+				<section class="interests">
+					<span style="font-size: 20px; font-weight: bold">SỞ THÍCH</span>
+					<div class="interests__container bd-grid">
+						<div class="interests__content">
+							<i class='bx bxs-microphone-alt interests__icon'></i> <span
+								class="interests__name">Ca Hát</span>
+						</div>
+						<div class="interests__content">
+							<i class='bx bxs-right-arrow interests__icon'></i> <span
+								class="interests__name">Chơi Game</span>
+						</div>
+					</div>
+				</section>
+
+				<div style="width: 100%; height: 100px; margin-top: 0;">
+					<span style="color: red; margin-left: 50%; float: right;">Design
+						by AnCutee Tdmu ❤</span>
+				</div>
+			</div>
+
+
+		</div>
+
+	</main>
+
+	<a href="#" class="scrolltop" id="scroll-top"> <i
+		class='bx bx-up-arrow-alt scrolltop__icon'></i>
+	</a>
+	<script src="/assets/js/html2pdf.bundle.min.js"></script>
+	<script src="/assets/js/main.js"></script>
+</body>
+
+</html>
